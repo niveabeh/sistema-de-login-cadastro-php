@@ -1,6 +1,6 @@
 <?php
-session_start();
-include_once('config.php');
+    session_start();
+    include_once('config.php');
 
 if(isset($_POST['submit']) && !empty($_POST['email']) && !empty($_POST['senha'])){
 

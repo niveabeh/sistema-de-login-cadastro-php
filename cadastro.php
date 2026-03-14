@@ -12,7 +12,9 @@ if (isset($_POST['submit'])) {
     $cidade = $_POST['cidade'];
     $estado = $_POST['estado'];
     $senha = $_POST['senha'];
-    $result = mysqli_query($conexao, "INSERT INTO usuarios (nome_completo, email, telefone, sexo, data_nascimento, cep, cidade, estado, senha) VALUES ('$nome','$email','$telefone','$sexo','$data','$cep','$cidade','$estado', '$senha')");
+    $result = mysqli_query($conexao,
+     "INSERT INTO usuarios (nome_completo, email, telefone, sexo, data_nascimento, cep, cidade, estado, senha) 
+    VALUES ('$nome','$email','$telefone','$sexo','$data','$cep','$cidade','$estado', '$senha')");
     header('Location: login.php');
 }
 

@@ -1,11 +1,15 @@
 <?php
-session_start();
+    session_start();
+    include_once('config.php');
 if (!isset($_SESSION['usuario'])) {
     header('Location: login.php');
     exit;
 }
 
-$usuario = $_SESSION['usuario'];
+    $usuario = $_SESSION['usuario'];
+
+    $sql = "SELECT * FROM usuarios ORDER BY id DESC";
+    $result = $conexao->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -29,22 +33,59 @@ $usuario = $_SESSION['usuario'];
         </div>
     </nav>
 
-    <div class="d-flex vh-100 justify-content-center align-items-center">
-        <div class="card shadow-lg rounded-4 p-5 text-center" style="max-width: 500px;">
-            <h2 class="fw-bold mb-4">Bem-vindo, <?= htmlspecialchars($usuario['nome_completo']) ?>!</h2>
-            <ul class="list-group list-group-flush text-start mb-4">
-                <li class="list-group-item"><strong>Email:</strong> <?= htmlspecialchars($usuario['email']) ?></li>
-                <?php if (!empty($usuario['telefone'])): ?>
-                    <li class="list-group-item"><strong>Telefone:</strong> <?= htmlspecialchars($usuario['telefone']) ?></li>
-                <?php endif; ?>
-                <?php if (!empty($usuario['cidade'])): ?>
-                    <li class="list-group-item"><strong>Cidade:</strong> <?= htmlspecialchars($usuario['cidade']) ?></li>
-                <?php endif; ?>
-                <?php if (!empty($usuario['estado'])): ?>
-                    <li class="list-group-item"><strong>Estado:</strong> <?= htmlspecialchars($usuario['estado']) ?></li>
-                <?php endif; ?>
-            </ul>
-            <a href="/sistema-de-login-cadastro-php/sair.php" class="btn btn-danger btn-lg w-100">Sair</a>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow-lg rounded-4 p-5 text-center bg-white mt-4" >
+            <h2 class="fw-bold mb-4">
+                Bem-vindo, <?= ($usuario['nome_completo']) ?>!
+            </h2>
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome completo</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Sexo</th>
+                        <th>Data de Nascimento</th>
+                        <th>Cep</th>
+                        <th>Endereço</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Senha</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <?php
+                    while ($user_data = mysqli_fetch_assoc($result)) {
+                        echo "<tr>";
+                        echo "<td>" . ($user_data['id']) . "</td>";
+                        echo "<td>" . ($user_data['nome_completo']) . "</td>";
+                        echo "<td>" . ($user_data['email']) . "</td>";
+                        echo "<td>" . ($user_data['telefone']) . "</td>";
+                        echo "<td>" . ($user_data['sexo']) . "</td>";
+                        echo "<td>" . ($user_data['data_nascimento']) . "</td>";
+                        echo "<td>" . ($user_data['cep']) . "</td>";
+                        echo "<td>" . ($user_data['cidade']) . "</td>";
+                        echo "<td>" . ($user_data['estado']) . "</td>";
+                        echo "<td>" . ($user_data['senha']) . "</td>";
+                        echo "<td> acoes </td>";
+                        echo "<td>
+                        <a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar</a>
+                        <a href='delete.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'>Excluir</a>
+                    </td>";
+
+                        echo "</tr>";
+                    }
+                    ?>
+                </tbody>
+            </table>
+
+            <a href="/sistema-de-login-cadastro-php/sair.php" class="btn btn-danger btn-lg w-100 mt-3">
+                Sair
+            </a>
         </div>
     </div>
 
