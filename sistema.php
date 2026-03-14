@@ -44,7 +44,7 @@ $usuario = $_SESSION['usuario'];
                     <li class="list-group-item"><strong>Estado:</strong> <?= htmlspecialchars($usuario['estado']) ?></li>
                 <?php endif; ?>
             </ul>
-            <a href="sair.php" class="btn btn-danger btn-lg w-100">Sair</a>
+            <a href="/sistema-de-login-cadastro-php/sair.php" class="btn btn-danger btn-lg w-100">Sair</a>
         </div>
     </div>
 
