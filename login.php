@@ -21,10 +21,10 @@
             </div>
             <div class="col-12 col-md-6 p-5 d-flex flex-column justify-content-center">
                 <h3 class="mb-4">Entrar</h3>
-                <form>
+                <form action="testeLogin.php" method="POST">
                     <input type="email" class="form-control mb-3" placeholder="Email">
                     <input type="password" class="form-control mb-3" placeholder="Senha">
-                    <button class="btn btn-primary w-100">Login</button>
+                    <input type="submit" class="btn btn-primary w-100" value="Enviar" name="submit">
                 </form>
                 <a class="my-2 link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" href="/sistema-de-login-cadastro-php/cadastro.php"> <small>Cadastrar</small> </a>
 
