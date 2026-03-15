@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once('config.php');
+
 if (!isset($_SESSION['usuario'])) {
     header('Location: login.php');
     exit;
@@ -8,7 +9,20 @@ if (!isset($_SESSION['usuario'])) {
 
 $usuario = $_SESSION['usuario'];
 
-$sql = "SELECT * FROM usuarios ORDER BY id DESC";
+if (isset($_GET['search']) && $_GET['search'] !== '') {
+
+    $data = $_GET['search'];
+
+    $sql = "SELECT * FROM usuarios 
+            WHERE id LIKE '%$data%' 
+            OR nome_completo LIKE '%$data%' 
+            OR email LIKE '%$data%' 
+            ORDER BY id DESC";
+} else {
+
+    $sql = "SELECT * FROM usuarios ORDER BY id DESC";
+}
+
 $result = $conexao->query($sql);
 ?>
 
@@ -20,6 +34,7 @@ $result = $conexao->query($sql);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
 </head>
 
 <body class="bg-light">
@@ -35,9 +50,15 @@ $result = $conexao->query($sql);
     <div class="container d-flex justify-content-center align-items-center">
         <nav class="navbar bg-body-tertiary">
             <div class="container-fluid">
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="user..." aria-label="Search" />
-                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                <form id="searchForm" class="d-flex">
+                    <input
+                        id="pesquisar"
+                        class="form-control me-2"
+                        type="search"
+                        placeholder="user..." />
+                    <button class="btn btn-outline-success" type="submit">
+                        Pesquisar
+                    </button>
                 </form>
             </div>
         </nav>
@@ -78,10 +99,10 @@ $result = $conexao->query($sql);
                         echo "<td>" . ($user_data['sexo']) . "</td>";
                         echo "<td>" . ($user_data['data_nascimento']) . "</td>";
                         echo "<td>" . ($user_data['cep']) . "</td>";
+                        echo "<td>" . ($user_data['endereco']) . "</td>";
                         echo "<td>" . ($user_data['cidade']) . "</td>";
                         echo "<td>" . ($user_data['estado']) . "</td>";
                         echo "<td>" . ($user_data['senha']) . "</td>";
-                        echo "<td> acoes </td>";
                         echo "<td><a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar
                                 </a>";
                         echo "<a href='deletar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'
@@ -98,6 +119,7 @@ $result = $conexao->query($sql);
         </div>
     </div>
 
+    <script src="/sistema-de-login-cadastro-php/views/assets/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
