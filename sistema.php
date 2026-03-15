@@ -1,15 +1,15 @@
 <?php
-    session_start();
-    include_once('config.php');
+session_start();
+include_once('config.php');
 if (!isset($_SESSION['usuario'])) {
     header('Location: login.php');
     exit;
 }
 
-    $usuario = $_SESSION['usuario'];
+$usuario = $_SESSION['usuario'];
 
-    $sql = "SELECT * FROM usuarios ORDER BY id DESC";
-    $result = $conexao->query($sql);
+$sql = "SELECT * FROM usuarios ORDER BY id DESC";
+$result = $conexao->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +34,7 @@ if (!isset($_SESSION['usuario'])) {
     </nav>
 
     <div class="d-flex justify-content-center align-items-center">
-        <div class="card shadow-lg rounded-4 p-5 text-center bg-white mt-4" >
+        <div class="card shadow-lg rounded-4 p-5 text-center bg-white mt-4">
             <h2 class="fw-bold mb-4">
                 Bem-vindo, <?= ($usuario['nome_completo']) ?>!
             </h2>
@@ -72,10 +72,10 @@ if (!isset($_SESSION['usuario'])) {
                         echo "<td>" . ($user_data['estado']) . "</td>";
                         echo "<td>" . ($user_data['senha']) . "</td>";
                         echo "<td> acoes </td>";
-                        echo "<td><a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar</a>
-                        <a href='deletar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'>Excluir</a>
-                    </td>";
-
+                        echo "<td><a href='editar.php?id=".$user_data['id']."' class='btn btn-sm btn-primary'>Editar
+                                </a>";
+                        echo "<a href='deletar.php?id=".$user_data['id']."' class='btn btn-sm btn-danger'
+                        onclick=\"return confirm('Tem certeza que deseja excluir este usuário?')\">Excluir</a>";
                         echo "</tr>";
                     }
                     ?>
@@ -87,7 +87,7 @@ if (!isset($_SESSION['usuario'])) {
             </a>
         </div>
     </div>
-
+  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
