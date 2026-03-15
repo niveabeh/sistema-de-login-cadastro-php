@@ -72,9 +72,8 @@ if (!isset($_SESSION['usuario'])) {
                         echo "<td>" . ($user_data['estado']) . "</td>";
                         echo "<td>" . ($user_data['senha']) . "</td>";
                         echo "<td> acoes </td>";
-                        echo "<td>
-                        <a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar</a>
-                        <a href='delete.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'>Excluir</a>
+                        echo "<td><a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar</a>
+                        <a href='deletar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'>Excluir</a>
                     </td>";
 
                         echo "</tr>";
