@@ -32,6 +32,16 @@ $result = $conexao->query($sql);
             </div>
         </div>
     </nav>
+    <div class="container d-flex justify-content-center align-items-center">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="user..." aria-label="Search" />
+                    <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+                </form>
+            </div>
+        </nav>
+    </div>
 
     <div class="d-flex justify-content-center align-items-center">
         <div class="card shadow-lg rounded-4 p-5 text-center bg-white mt-4">
@@ -39,7 +49,7 @@ $result = $conexao->query($sql);
                 Bem-vindo, <?= ($usuario['nome_completo']) ?>!
             </h2>
 
-            <table class="table table-striped">
+            <table class="table table-striped ">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -72,9 +82,9 @@ $result = $conexao->query($sql);
                         echo "<td>" . ($user_data['estado']) . "</td>";
                         echo "<td>" . ($user_data['senha']) . "</td>";
                         echo "<td> acoes </td>";
-                        echo "<td><a href='editar.php?id=".$user_data['id']."' class='btn btn-sm btn-primary'>Editar
+                        echo "<td><a href='editar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-primary'>Editar
                                 </a>";
-                        echo "<a href='deletar.php?id=".$user_data['id']."' class='btn btn-sm btn-danger'
+                        echo "<a href='deletar.php?id=" . $user_data['id'] . "' class='btn btn-sm btn-danger'
                         onclick=\"return confirm('Tem certeza que deseja excluir este usuário?')\">Excluir</a>";
                         echo "</tr>";
                     }
@@ -87,7 +97,7 @@ $result = $conexao->query($sql);
             </a>
         </div>
     </div>
-  
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
