@@ -7,7 +7,7 @@ form.addEventListener("submit", function (event) {
 
     const search = document.getElementById("pesquisar").value;
 
-    window.location.href = "sistema.php?search=" + encodeURIComponent(search);
+    window.location.href = "sistema.php?search=" +search;
 });
 
 
